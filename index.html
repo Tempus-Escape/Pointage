@@ -1,53 +1,54 @@
 <!DOCTYPE html>
 <html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pointage des Salles</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Pointage des Salles</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
 
-    <header>
-        <img src="FB_IMG_1746051349320.jpg" width="100">
-        <h1>Tempus</h1>
-        <div>
-            <h2><a href="index.html">Pointage</a></h2>
-            <h2><a href="historique.html">Historique</a></h2>
+        <header>
+            <img src="FB_IMG_1746051349320.jpg" width="100">
+            <h1>Tempus</h1>
+            <div>
+                <h2><a href="index.html">Pointage</a></h2>
+                <h2><a href="historique.html">Historique</a></h2>
+            </div>
+        </header>
+
+        <div class="container">
+
+            <div class="selectors">
+                <label for="gm-select">Game Master :</label>
+                <select id="gm-select"></select>
+
+                <label for="room-select">Salle :</label>
+                <select id="room-select"></select>
+            </div>
+
+            <div class="buttons">
+                <button id="decrement-btn">-1</button>
+                <span id="room-count">0</span>
+                <button id="increment-btn">+1</button>
+            </div>
+
+            <div class="recap">
+                <h2>Récapitulatif</h2>
+                <ul id="recap-list"></ul>
+            </div>
+
+            <div class="totals">
+                <p><strong>Temps total :</strong> <span id="total-time">0</span> h</p>
+                <p><strong>Coût à facturer :</strong> <span id="total-cost">0</span> €</p>
+            </div>
+
+            <div class="submit-section">
+                <input type="text" id="code-input" placeholder="Entrez votre code">
+                <button id="submit-btn">Envoyer</button>
+            </div>
         </div>
-    </header>
 
-    <div class="container">
-
-        <div class="selectors">
-            <label for="gm-select">Game Master :</label>
-            <select id="gm-select"></select>
-
-            <label for="room-select">Salle :</label>
-            <select id="room-select"></select>
-        </div>
-
-        <div class="buttons">
-            <button id="increment-btn">+</button>
-            <button id="decrement-btn">-</button>
-        </div>
-
-        <div class="recap">
-            <h2>Récapitulatif</h2>
-            <ul id="recap-list"></ul>
-        </div>
-
-        <div class="totals">
-            <p><strong>Temps total :</strong> <span id="total-time">0</span> h</p>
-            <p><strong>Coût à facturer :</strong> <span id="total-cost">0</span> €</p>
-        </div>
-
-        <div class="submit-section">
-            <input type="text" id="code-input" placeholder="Entrez votre code">
-            <button id="submit-btn">Envoyer</button>
-        </div>
-    </div>
-
-    <script src="script.js"></script>
-</body>
+        <script src="script.js"></script>
+    </body>
 </html>
