@@ -1,6 +1,6 @@
 // script-historique.js – Affichage de l’historique des pointages
 
-// Même API URL
+
 const API_URL = "https://script.google.com/macros/s/AKfycbz4A4osy5_HlfFI7lYDqtVpo67aNCjA2LGPfDsYvPdnp2RPj-egAxeZ0A-HRPxnpDaX9Q/exec";
 
 let gmList = [];   // Liste des GM
@@ -26,6 +26,16 @@ async function initHistory() {
   document.getElementById("load-history").onclick = loadHistory;
 }
 
+// Fonction utilitaire : parse une date style "Fri Jun 06" vers "yyyy-MM-dd"
+function parseDateString(dateStr) {
+  const parsed = new Date(dateStr);
+  if (isNaN(parsed.getTime())) return ""; // si parsing échoue
+  const year  = parsed.getFullYear();
+  const month = String(parsed.getMonth() + 1).padStart(2, '0');
+  const day   = String(parsed.getDate()).padStart(2, '0');
+  return `${year}-${month}-${day}`;
+}
+
 // 2) Charge et filtre l’historique
 async function loadHistory() {
   const gm    = document.getElementById("gm-select").value;
@@ -39,8 +49,11 @@ async function loadHistory() {
   const res  = await fetch(`${API_URL}?origin=${encodeURIComponent(location.origin)}&user=${encodeURIComponent(gm)}&all=1`);
   const rows = await res.json(); // [[date,hours,cost,q1,q2,…],…]
 
-  // Filtre entre start et end
-  const filtered = rows.filter(r => r[0] >= start && r[0] <= end);
+  // Filtre entre start et end (on parse la date en yyyy-MM-dd pour être cohérent)
+  const filtered = rows.filter(r => {
+    const rowDate = parseDateString(r[0]);
+    return rowDate >= start && rowDate <= end;
+  });
 
   // Affiche chaque date + salles jouées
   const container = document.getElementById("history-results");
@@ -48,7 +61,7 @@ async function loadHistory() {
   let totalH = 0, totalM = 0;
 
   filtered.forEach(row => {
-    const date       = row[0];
+    const date       = parseDateString(row[0]); // afficher aussi la date formatée
     const quantities = row.slice(3);
 
     // Crée un bloc pour cette date
@@ -76,3 +89,4 @@ async function loadHistory() {
 }
 
 initHistory().catch(console.error);
+
