@@ -58,16 +58,16 @@ function onGMChange(e) {
     const idx = gmList.indexOf(selectedGM);
     const row = lastRows[idx];
     if (row) {
-      const today = new Date().toISOString().slice(0,10);
-      // on normalise la date de la cellule (row[0])
-      const rowDate = String(row[0]).slice(0,10);
-      if (rowDate === today) {
-        // les quantités commencent à la colonne 4 (index 3)
-        row.slice(3).forEach((q,i) => {
-          counts[ rooms[i].nom ] = parseInt(q) || 0;
-        });
-      }
+        const today = new Date().toISOString().slice(0,10);
+        if (String(row[0]).slice(0,10) === today) {
+            row.slice(3).forEach((q,i) => {
+            counts[ rooms[i].nom ] = parseInt(q) || 0;
+            });
+        }
     }
+    renderSummary();
+    updateTotals();
+    updateRoomUI();
   
     // met à jour l’affichage
     renderSummary();
