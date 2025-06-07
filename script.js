@@ -128,41 +128,39 @@ fetch(API_URL)
 
 // Envoi des données
 async function sendData() {
-  if (!selectedGM) {
-    alert("Choisissez d'abord votre nom");
-    return;
+    if (!selectedGM) {
+      alert("Choisissez d'abord votre nom");
+      return;
+    }
+    const code = document.getElementById("code-input").value.trim();
+    if (!code) {
+      alert("Entrez votre code secret");
+      return;
+    }
+  
+    // Prépare date et quantités
+    const date = new Date().toISOString().slice(0,10);
+    const vals = rooms.map(r => counts[r.nom] || 0).join(",");
+  
+    // Monte l'URL complète en GET
+    const url = API_URL
+      + `?origin=${encodeURIComponent(location.origin)}`
+      + `&user=${encodeURIComponent(selectedGM)}`
+      + `&code=${encodeURIComponent(code)}`
+      + `&date=${encodeURIComponent(date)}`
+      + `&vals=${encodeURIComponent(vals)}`;
+  
+    console.log("⤴️ GET vers", url);
+  
+    try {
+      const res = await fetch(url, { method: "GET" });
+      const text = await res.text();
+      alert(text === "OK" ? "Enregistré ✅" : "Erreur ❌ " + text);
+    } catch (err) {
+      console.error("❌ Erreur réseau GET:", err);
+      alert("Erreur réseau, voir console.");
+    }
   }
-  const code = document.getElementById("code-input").value.trim();
-  if (!code) {
-    alert("Entrez votre code secret");
-    return;
-  }
-
-  const payload = {
-    origin: location.origin,
-    user:   selectedGM,
-    code:   code,
-    valeurs: [
-      new Date().toISOString().slice(0,10),
-      ...rooms.map(r => counts[r.nom]||0)
-    ]
-  };
-
-  console.log("▶️ Envoi du payload :", payload);
-
-  try {
-    const res = await fetch(API_URL, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload)
-    });
-    const text = await res.text();
-    alert(text === "OK" ? "Enregistré ✅" : "Erreur ❌ - " + text);
-  } catch (err) {
-    console.error("Erreur fetch POST:", err);
-    alert("Erreur réseau, voir console.");
-  }
-}
 
 // Démarrage après chargement du DOM
 document.addEventListener("DOMContentLoaded", init);
