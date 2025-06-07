@@ -120,6 +120,12 @@ async function loadToday() {
   }
 }
 
+
+fetch(API_URL)
+  .then(r => r.text())
+  .then(txt => console.log("✅ Réponse GET brute :", txt))
+  .catch(err => console.error("❌ Erreur GET test :", err));
+
 // Envoi des données
 async function sendData() {
   if (!selectedGM) {
