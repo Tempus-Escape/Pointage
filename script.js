@@ -101,27 +101,38 @@ function updateTotals() {
 
 // Charge les données du jour (si tu gardes cette fonctionnalité)
 async function loadToday() {
-  if (!selectedGM) {
-    alert("Choisissez d'abord votre nom");
-    return;
-  }
-  const today = new Date().toISOString().slice(0,10);
-  try {
-    const res  = await fetch(`${API_URL}?origin=${encodeURIComponent(location.origin)}&user=${encodeURIComponent(selectedGM)}`);
-    const rows = await res.json();
-    const todayRow = rows.find(r => r[0].slice(0,10) === today);;
-    if (!todayRow) {
-      alert("Pas d'enregistrement pour aujourd'hui");
+    if (!selectedGM) {
       return;
     }
-    rooms.forEach((r,i) => counts[r.nom] = parseInt(todayRow[3+i]) || 0);
-    renderSummary();
-    updateTotals();
-    updateRoomUI();
-  } catch (err) {
-    console.error("Erreur lors du chargement d'aujourd'hui :", err);
+    const today = new Date().toISOString().slice(0,10);
+  
+    try {
+      const res  = await fetch(
+        `${API_URL}?origin=${encodeURIComponent(location.origin)}&user=${encodeURIComponent(selectedGM)}`
+      );
+      const rows = await res.json();
+  
+      console.log("▶️ rows récupérées :", rows);
+  
+      const todayRow = rows.find(r => {
+        const rowDate = new Date(r[0]).toISOString().slice(0,10);
+        return rowDate === today;
+      });
+  
+      if (!todayRow) {
+        console.warn("Aucune ligne datée de", today);
+        return;
+      }
+  
+      rooms.forEach((r,i) => counts[r.nom] = parseInt(todayRow[3+i]) || 0);
+      renderSummary();
+      updateTotals();
+      updateRoomUI();
+  
+    } catch (err) {
+      console.error("Erreur lors du chargement d'aujourd'hui :", err);
+    }
   }
-}
 
 
 fetch(API_URL)
