@@ -112,7 +112,7 @@ async function loadToday() {
       );
       const rows = await res.json();
   
-      console.log("▶️ rows récupérées :", rows);
+      console.log("▶️ rows récupérées :",selectedGM,":", rows);
   
       const todayRow = rows.find(r => {
         const rowDate = new Date(r[0]).toISOString().slice(0,10);
