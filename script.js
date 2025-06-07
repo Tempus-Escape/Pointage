@@ -109,7 +109,7 @@ async function loadToday() {
   try {
     const res  = await fetch(`${API_URL}?origin=${encodeURIComponent(location.origin)}&user=${encodeURIComponent(selectedGM)}`);
     const rows = await res.json();
-    const todayRow = rows.find(r => r[0] === today);
+    const todayRow = rows.find(r => r[0].slice(0,10) === today);;
     if (!todayRow) {
       alert("Pas d'enregistrement pour aujourd'hui");
       return;
