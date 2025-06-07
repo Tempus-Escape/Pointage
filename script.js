@@ -90,7 +90,7 @@ function updateTotals() {
   rooms.forEach(r => {
     const n = counts[r.nom] || 0;
     totalH += n * r.duree;
-    totalM += n * r.duree * r.prix;
+    totalM += n * r.prix;
   });
   document.getElementById("total-time").textContent  = totalH.toFixed(2);
   document.getElementById("total-cost").textContent  = totalM.toFixed(2);
