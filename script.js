@@ -5,6 +5,7 @@ const API_URL = "https://script.google.com/macros/s/AKfycbz4A4osy5_HlfFI7lYDqtVp
 let rooms = [];    // [{ nom, duree, prix }]
 let counts = {};   // { "Salle A": 0, … }
 let gmList = [];   // ["Alice", "Bob", …]
+let lastRows = [];  // la dernière ligne de chaque GM
 let selectedGM = "";
 let selectedRoom = "";
 
@@ -20,6 +21,8 @@ async function init() {
       duree: parseFloat(r[1]),
       prix:  parseFloat(r[2])
     }));
+    lastRows = data.lastRows;
+    console.log("▶️ lastRows reçues:", lastRows);
   } catch (err) {
     console.error("Erreur lors du chargement des données :", err);
     return;
@@ -47,15 +50,33 @@ async function init() {
 
 // Quand on change de GM
 function onGMChange(e) {
-  selectedGM = e.target.value;
-  rooms.forEach(r => counts[r.nom] = 0);
-  renderSummary();
-  updateTotals();
-  updateRoomUI();
-  if(selectedGM){
-    loadToday();
+    selectedGM = e.target.value;
+    // on réinitialise
+    rooms.forEach(r => counts[r.nom] = 0);
+  
+    // récupère l’index du GM
+    const idx = gmList.indexOf(selectedGM);
+    const row = lastRows[idx];
+    if (row) {
+      const today = new Date().toISOString().slice(0,10);
+      // on normalise la date de la cellule (row[0])
+      const rowDate = String(row[0]).slice(0,10);
+      if (rowDate === today) {
+        // les quantités commencent à la colonne 4 (index 3)
+        row.slice(3).forEach((q,i) => {
+          counts[ rooms[i].nom ] = parseInt(q) || 0;
+        });
+      }
+    }
+  
+    // met à jour l’affichage
+    renderSummary();
+    updateTotals();
+    updateRoomUI();
+  
+    // si tu veux en plus recharger via loadToday(), tu peux le laisser
+    // if (selectedGM) loadToday();
   }
-}
 
 // Met à jour le compteur visible
 function updateRoomUI() {
