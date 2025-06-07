@@ -114,10 +114,15 @@ async function loadToday() {
   
       console.log("▶️ rows récupérées :",selectedGM,":", rows);
   
-      const todayRow = rows.find(r => {
-        const rowDate = new Date(r[0]).toISOString().slice(0,10);
-        return rowDate === today;
-      });
+    // const todayRow = rows.find(r => { … });
+
+    // Nouveau :
+        const todayRow = rows.find(r => {
+            // r[0] est une string "2025-06-07" (ou "07/06/2025" si ta feuille est configurée ainsi)
+            // On prend juste les 10 premiers caractères pour être sûr d'avoir "YYYY-MM-DD"
+            const dateStr = String(r[0]).slice(0,10);
+            return dateStr === today;
+        });
   
       if (!todayRow) {
         console.warn("Aucune ligne datée de", today);
