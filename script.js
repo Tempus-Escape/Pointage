@@ -76,7 +76,7 @@ function onGMChange(e) {
   
     // si tu veux en plus recharger via loadToday(), tu peux le laisser
     // if (selectedGM) loadToday();
-  }
+}
 
 // Met à jour le compteur visible
 function updateRoomUI() {
