@@ -111,30 +111,27 @@ async function loadToday() {
 
 // Envoie toutes les données à Apps Script via POST
 async function sendData() {
-  if (!selectedGM) { alert("Choisissez d'abord votre nom"); return; }
-  const code = document.getElementById("code-input").value.trim();
-  if (!code) { alert("Entrez votre code secret"); return; }
-
-  const payload = {
-    origin: location.origin,
-    user:   selectedGM,
-    code:   code,
-    role:   "gm",  // conservé pour compatibilité
-    valeurs: [
-      new Date().toISOString().slice(0,10),
-      // envoie date + quantités
-      ...rooms.map(r => counts[r.nom]||0)
-    ]
-  };
-
-  const res = await fetch(API_URL, {
-    method: "POST",
-    headers: { "Content-Type":"application/json" },
-    body: JSON.stringify(payload)
-  });
-  const text = await res.text();
-  alert(text === "OK" ? "Enregistré ✅" : "Erreur ❌");
-}
+    // … tes validations de GM et de code ici …
+  
+    const payload = {
+      origin: location.origin,
+      user:   selectedGM,
+      code:   code,
+      valeurs: [
+        new Date().toISOString().slice(0,10),       // la date
+        ...rooms.map(r => counts[r.nom] || 0)       // les quantités de chaque salle
+      ]
+    };
+  
+    console.log("▶️ Envoi du payload au serveur :", payload);
+  
+    const res = await fetch(API_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload)
+    });
+    // …
+  }
 
 // Démarre l'initialisation
 init().catch(console.error);
