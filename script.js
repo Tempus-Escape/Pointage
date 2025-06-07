@@ -51,31 +51,23 @@ async function init() {
 // Quand on change de GM
 function onGMChange(e) {
     selectedGM = e.target.value;
-    // on réinitialise
     rooms.forEach(r => counts[r.nom] = 0);
-  
-    // récupère l’index du GM
+
     const idx = gmList.indexOf(selectedGM);
     const row = lastRows[idx];
     if (row) {
-        const today = new Date().toISOString().slice(0,10);
-        if (String(row[0]).slice(0,10) === today) {
+        const rowDate = new Date(row[0]).toLocaleDateString('fr-CA');
+        const today   = new Date().toLocaleDateString('fr-CA');
+        if (rowDate === today) {
             row.slice(3).forEach((q,i) => {
-            counts[ rooms[i].nom ] = parseInt(q) || 0;
+                counts[ rooms[i].nom ] = parseInt(q) || 0;
             });
         }
     }
+
     renderSummary();
     updateTotals();
     updateRoomUI();
-  
-    // met à jour l’affichage
-    renderSummary();
-    updateTotals();
-    updateRoomUI();
-  
-    // si tu veux en plus recharger via loadToday(), tu peux le laisser
-    // if (selectedGM) loadToday();
 }
 
 // Met à jour le compteur visible
