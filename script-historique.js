@@ -36,7 +36,7 @@ async function loadHistory() {
   }
 
   // Récupère toutes les lignes du GM
-  const res  = await fetch(`${API_URL}?origin=${encodeURIComponent(location.origin)}&user=${encodeURIComponent(gm)}`);
+  const res  = await fetch(`${API_URL}?origin=${encodeURIComponent(location.origin)}&user=${encodeURIComponent(gm)}&all=1`);
   const rows = await res.json(); // [[date,hours,cost,q1,q2,…],…]
 
   // Filtre entre start et end
