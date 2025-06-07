@@ -1,7 +1,7 @@
 // script.js – Gestion du pointage quotidien des GM
 
 // → URL de ton Apps Script Web App (POST + GET)
-const API_URL = "https://script.google.com/macros/s/TON_ID_EXEC/exec";
+const API_URL = "https://script.google.com/macros/s/AKfycbz4A4osy5_HlfFI7lYDqtVpo67aNCjA2LGPfDsYvPdnp2RPj-egAxeZ0A-HRPxnpDaX9Q/exec";
 
 // Stocke la configuration des salles et le nombre de parties
 let rooms = [];   // [{ nom, duree, prix }]

@@ -1,7 +1,7 @@
 // script-historique.js – Affichage de l’historique des pointages
 
 // Même API URL
-const API_URL = "https://script.google.com/macros/s/TON_ID_EXEC/exec";
+const API_URL = "https://script.google.com/macros/s/AKfycbz4A4osy5_HlfFI7lYDqtVpo67aNCjA2LGPfDsYvPdnp2RPj-egAxeZ0A-HRPxnpDaX9Q/exec";
 
 let gmList = [];   // Liste des GM
 let rooms   = [];  // Liste des salles {nom,duree,prix}
