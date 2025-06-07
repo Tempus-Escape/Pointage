@@ -52,6 +52,9 @@ function onGMChange(e) {
   renderSummary();
   updateTotals();
   updateRoomUI();
+  if(selectedGM){
+    loadToday();
+  }
 }
 
 // Met à jour le compteur visible
