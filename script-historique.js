@@ -1,0 +1,78 @@
+// script-historique.js – Affichage de l’historique des pointages
+
+// Même API URL
+const API_URL = "https://script.google.com/macros/s/TON_ID_EXEC/exec";
+
+let gmList = [];   // Liste des GM
+let rooms   = [];  // Liste des salles {nom,duree,prix}
+
+// 1) Initialisation au chargement de la page
+async function initHistory() {
+  const res  = await fetch(`${API_URL}?origin=${encodeURIComponent(location.origin)}`);
+  const data = await res.json();
+  gmList = data.noms;
+  rooms  = data.salles.map(r => ({
+    nom:   r[0],
+    duree: parseFloat(r[1]),
+    prix:  parseFloat(r[2])
+  }));
+
+  // Remplit le <select> GM
+  const gmSelect = document.getElementById("gm-select");
+  gmSelect.innerHTML = `<option value=\"\">--Choisir--</option>`
+    + gmList.map(g => `<option>${g}</option>`).join("");
+
+  // Lie le bouton de chargement
+  document.getElementById("load-history").onclick = loadHistory;
+}
+
+// 2) Charge et filtre l’historique
+async function loadHistory() {
+  const gm    = document.getElementById("gm-select").value;
+  const start = document.getElementById("start-date").value;
+  const end   = document.getElementById("end-date").value;
+  if (!gm || !start || !end) {
+    alert("Sélectionnez un GM et les deux dates"); return;
+  }
+
+  // Récupère toutes les lignes du GM
+  const res  = await fetch(`${API_URL}?origin=${encodeURIComponent(location.origin)}&user=${encodeURIComponent(gm)}`);
+  const rows = await res.json(); // [[date,hours,cost,q1,q2,…],…]
+
+  // Filtre entre start et end
+  const filtered = rows.filter(r => r[0] >= start && r[0] <= end);
+
+  // Affiche chaque date + salles jouées
+  const container = document.getElementById("history-results");
+  container.innerHTML = "";
+  let totalH = 0, totalM = 0;
+
+  filtered.forEach(row => {
+    const date       = row[0];
+    const quantities = row.slice(3);
+
+    // Crée un bloc pour cette date
+    const block = document.createElement("div");
+    block.innerHTML = `<h4>${date}</h4>`;
+    const ul = document.createElement("ul");
+
+    quantities.forEach((q,i) => {
+      if (q > 0) {
+        const li = document.createElement("li");
+        li.textContent = `${rooms[i].nom} : ${q}`;
+        ul.appendChild(li);
+        totalH += q * rooms[i].duree;
+        totalM += q * rooms[i].duree * rooms[i].prix;
+      }
+    });
+
+    block.appendChild(ul);
+    container.appendChild(block);
+  });
+
+  // 3) Affiche les totaux
+  document.getElementById("total-heures").textContent   = totalH.toFixed(2);
+  document.getElementById("total-facture").textContent = totalM.toFixed(2);
+}
+
+initHistory().catch(console.error);
