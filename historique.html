@@ -7,26 +7,34 @@
 </head>
 <body>
     <header>
-        <img src="FB_IMG_1746051349320.jpg" width="100">
-        <h1>Tempus</h1>
         <div>
-            <h2><a href="index.html">Pointage</a></h2>
-            <h2><a href="historique.html">Historique</a></h2>
+            <img src="FB_IMG_1746051349320.jpg" width="100">
+            <h1>Tempus</h1>
+        </div>
+        <div>
+            <nav>
+                <h2><a href="index.html">Pointage</a></h2>
+                <h2><a href="historique.html">Historique</a></h2>
+            </nav>
         </div>
     </header>
 
     <main id="historique">
         <h2>Historique des Pointages</h2>
-
-        <label for="gm-select">Game Master :</label>
-        <select id="gm-select"></select>
-
-        <label for="start-date">Date de début :</label>
-        <input type="date" id="start-date">
-
-        <label for="end-date">Date de fin :</label>
-        <input type="date" id="end-date">
-
+        <div class="selectors">
+            <label for="gm-select">Game Master :</label>
+            <select id="gm-select"></select>
+        </div>
+        <div class="selectors-date">
+            <div>
+                <label for="start-date">Date de début :</label>
+                <input type="date" id="start-date">
+            </div>
+            <div>
+                <label for="end-date">Date de fin :</label>
+                <input type="date" id="end-date">
+            </div>
+        </div>
         <button id="load-history">Charger l'historique</button>
         <h3>Pointages</h3>
         <div id="history-results">

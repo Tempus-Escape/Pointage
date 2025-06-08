@@ -1,8 +1,142 @@
 html, body {
-    height: 100%;
+    height: 100vh;
     width: 100%;
     margin: 0;
     padding: 0;
     font-family: sans-serif;
-    background-color: white; /* optionnel : couleur de fond */
+    background-color: #171928; /* optionnel : couleur de fond */
+}
+
+header{
+    display: flex;
+    flex-direction: column;
+    height: 20%;
+}
+
+header div{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+header img{
+    width: 4em;
+    height: 4em;
+}
+
+h1{
+    color: #e9dba0;
+
+}
+
+h2{
+    color: #e9dba0;
+}
+
+h2 a{
+    color: #e9dba0;
+}
+
+nav {
+    display: flex;
+    justify-content: space-evenly;  /* espace équivalent entre les deux titres */
+    align-items: center;            /* aligne verticalement si les hauteurs diffèrent */
+    width: 100%;                    /* prend toute la largeur */
+    padding: 0 1rem;                /* un peu d’air sur les côtés */
+    box-sizing: border-box;         /* pour que le padding soit inclus dans le 100% */
+    border-bottom: 1px solid #a18540;
+    border-top: 1px solid #a18540;
+}
+
+div.container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 80%;
+}
+
+div.selectors{
+    width: 100%;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 20px;
+}
+
+.selectors label{
+    color: #e9dba0;
+    padding: 10px;
+    text-decoration: underline;
+}
+
+.buttons {
+    display: flex;
+    width: 40%;
+    justify-content: space-between;
+}
+
+select, button{
+    background-color: #e9dba0;
+    color: white;
+    min-width: 20%;
+    font-size: larger;
+}
+
+span, p{
+    color: white;
+    font-size: large;
+}
+
+div.recap,div#history-results{
+    height: 50%;
+    overflow: auto;
+    padding: 1rem;
+    box-sizing: border-box;
+}
+
+.totals {
+    display: flex;
+    flex-direction: column;   /* empile les <p> */
+    align-items: center;      /* centre chaque <p> horizontalement */
+}
+.total p{
+    height: 5%;
+}
+
+.submit-section{
+    display: flex;
+    justify-content: space-between;
+    width: 70%;
+}
+
+
+
+
+
+
+main{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 80%;
+}
+
+.selectors-date{
+    display: flex;
+    width: 50%;
+    justify-content: space-between;
+    padding-bottom: 20px;
+}
+
+.selectors-date div{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    color: #e9dba0;
+}
+
+h3{
+    color: #e9dba0;
+    text-decoration: underline; 
 }
