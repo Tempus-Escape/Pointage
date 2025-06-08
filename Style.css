@@ -80,6 +80,7 @@ select, button{
     background-color: #e9dba0;
     color: white;
     min-width: 20%;
+    width: auto;
     font-size: larger;
 }
 
@@ -93,6 +94,8 @@ div.recap,div#history-results{
     overflow: auto;
     padding: 1rem;
     box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
 }
 
 .totals {
@@ -124,7 +127,7 @@ main{
 
 .selectors-date{
     display: flex;
-    width: 50%;
+    width: auto;
     justify-content: space-between;
     padding-bottom: 20px;
 }
@@ -134,6 +137,8 @@ main{
     flex-direction: column;
     text-align: center;
     color: #e9dba0;
+    margin-left: 10px;
+    margin-right: 10px;
 }
 
 h3{
