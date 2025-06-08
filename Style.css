@@ -89,7 +89,7 @@ span, p{
 }
 
 div.recap,div#history-results{
-    height: 50%;
+    height: 40%;
     overflow: auto;
     padding: 1rem;
     box-sizing: border-box;
