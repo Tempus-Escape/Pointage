@@ -115,6 +115,10 @@ div.recap,div#history-results{
 .submit-section{
     display: flex;
     justify-content: space-between;
+}
+
+#submit-btn{
+    display: inline-flex;
     width: auto;
 }
 
