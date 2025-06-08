@@ -1,52 +1,52 @@
 <!DOCTYPE html>
 <html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <title>Historique - Tempus</title>
-    <link rel="stylesheet" href="Style.css">
-</head>
-<body>
-    <header>
-        <div>
-            <img src="FB_IMG_1746051349320.jpg" width="100">
-            <h1>Tempus</h1>
-        </div>
-        <div>
-            <nav>
-                <h2><a href="index.html">Pointage</a></h2>
-                <h2><a href="historique.html">Historique</a></h2>
-            </nav>
-        </div>
-    </header>
-
-    <main id="historique">
-        <h2>Historique des Pointages</h2>
-        <div class="selectors">
-            <label for="gm-select">Game Master :</label>
-            <select id="gm-select"></select>
-        </div>
-        <div class="selectors-date">
+    <head>
+        <meta charset="UTF-8">
+        <title>Historique - Tempus</title>
+        <link rel="stylesheet" href="Style.css">
+    </head>
+    <body>
+        <header>
             <div>
-                <label for="start-date">Date de début :</label>
-                <input type="date" id="start-date">
+                <img src="FB_IMG_1746051349320.jpg" width="100">
+                <h1>Tempus</h1>
             </div>
             <div>
-                <label for="end-date">Date de fin :</label>
-                <input type="date" id="end-date">
+                <nav>
+                    <h2><a href="index.html">Pointage</a></h2>
+                    <h2><a href="historique.html">Historique</a></h2>
+                </nav>
             </div>
-        </div>
-        <button id="load-history">Charger l'historique</button>
-        <h3>Pointages</h3>
-        <div id="history-results">
-            <!-- Résultats dynamiques ici -->
-        </div>
-
-        <div id="totaux-historique">
-            <p>Total d’heures : <span id="total-heures">0</span> h</p>
-            <p>Total à facturer : <span id="total-facture">0</span> €</p>
-        </div>
-    </main>
-
-    <script src="script-historique.js"></script>
-</body>
+        </header>
+    
+        <main id="historique">
+            <h2>Historique des Pointages</h2>
+            <div class="selectors">
+                <label for="gm-select">Game Master :</label>
+                <select id="gm-select"></select>
+            </div>
+            <div class="selectors-date">
+                <div>
+                    <label for="start-date">Date de début :</label>
+                    <input type="date" id="start-date">
+                </div>
+                <div>
+                    <label for="end-date">Date de fin :</label>
+                    <input type="date" id="end-date">
+                </div>
+            </div>
+            <button id="load-history">Charger l'historique</button>
+            <h3>Pointages</h3>
+            <div id="history-results">
+                <!-- Résultats dynamiques ici -->
+            </div>
+    
+            <div id="totaux-historique">
+                <p>Total d’heures : <span id="total-heures">0</span> h</p>
+                <p>Total à facturer : <span id="total-facture">0</span> €</p>
+            </div>
+        </main>
+    
+        <script src="script-historique.js"></script>
+    </body>
 </html>
