@@ -96,6 +96,11 @@ div.recap,div#history-results{
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
+    align-items: center;
+}
+
+#recap-list{
+    color: white;
 }
 
 .totals {
@@ -110,7 +115,7 @@ div.recap,div#history-results{
 .submit-section{
     display: flex;
     justify-content: space-between;
-    width: 70%;
+    width: auto;
 }
 
 
@@ -127,7 +132,7 @@ main{
 
 .selectors-date{
     display: flex;
-    width: auto;
+    width: 100%;
     justify-content: space-between;
     padding-bottom: 20px;
 }
