@@ -156,6 +156,10 @@ h3{
     text-decoration: underline; 
 }
 
-#history-results{
+#history-results ul, #history-results li {
+    margin: 0;
+    padding: 0;
+    list-style-position: inside;
     color: white;
-}
+  }
+  
