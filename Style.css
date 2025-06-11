@@ -115,7 +115,7 @@ div.recap,div#history-results{
 .submit-section{
     display: flex;
     justify-content: space-between;
-    
+
 }
 
 #submit-btn{
@@ -154,4 +154,8 @@ main{
 h3{
     color: #e9dba0;
     text-decoration: underline; 
+}
+
+.history-results{
+    color: white;
 }
