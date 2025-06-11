@@ -155,7 +155,7 @@ h3{
     color: #e9dba0;
     text-decoration: underline; 
 }
-#history-results{
+#history-results,h4{
     color: white;
 }
 
