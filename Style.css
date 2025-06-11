@@ -155,6 +155,9 @@ h3{
     color: #e9dba0;
     text-decoration: underline; 
 }
+#history-results{
+    color: white;
+}
 
 #history-results ul, #history-results li {
     margin: 0;
