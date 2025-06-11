@@ -78,10 +78,11 @@ async function loadHistory() {
         totalM += q * rooms[i].duree * rooms[i].prix;
       }
     });
-
+    if(ul.children.length>0){
     block.appendChild(ul);
     container.appendChild(block);
-  });
+    }
+    });
 
   // 3) Affiche les totaux
   document.getElementById("total-heures").textContent   = totalH.toFixed(2);
