@@ -159,34 +159,35 @@ h3{
     color: white;
 }
 
-/* Annule la redondance */
-#history-results ul, #history-results li {
-    color: white;
+/* === POUR L'HISTORIQUE === */
+
+/* On retire la règle qui forçait inside et resetait tout */
+#history-results ul,
+#history-results li {
+  color: white;
 }
 
-/* Conteneur date + liste */
+/* Chaque bloc date + liste */
 .history-block {
-    margin-bottom: 1em;
+  margin-bottom: 1.5em;
+  width: 100%;             /* occupe toute la largeur disponible */
 }
-    
-/* Date du bloc */
+
+/* La date elle-même */
 .history-date {
-    font-weight: bold;
-    display: block;
-    margin: 0;
-    padding: 0.2em 0;
+  font-weight: bold;
+  margin: 0 0 0.3em 0;      /* un petit écart avant la liste */
+  color: white;
 }
-    
-/* Liste des salles */
+
+/* La liste des salles */
 .history-list {
-    margin: 0;
-    margin-top: 0;
-    padding-left: 1.5em;
-    list-style-type: disc;
+  list-style-position: outside;  /* puces à l'extérieur du texte */
+  padding-left: 1.5em;           /* indentation pour toutes les lignes */
+  margin: 0 0 1em 0;             /* espacement en bas */
 }
-    
-/* Élément de salle */
+
+/* Les éléments de la liste */
 .history-list li {
-    margin: 0.1em 0;
+  margin: 0.2em 0;
 }
-  
