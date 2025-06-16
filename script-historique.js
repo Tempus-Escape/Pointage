@@ -42,34 +42,41 @@ async function loadHistory() {
   const start = document.getElementById("start-date").value;
   const end   = document.getElementById("end-date").value;
   if (!gm || !start || !end) {
-    alert("Sélectionnez un GM et les deux dates"); return;
+    alert("Sélectionnez un GM et les deux dates");
+    return;
   }
 
   // Récupère toutes les lignes du GM
   const res  = await fetch(`${API_URL}?origin=${encodeURIComponent(location.origin)}&user=${encodeURIComponent(gm)}&all=1`);
   const rows = await res.json(); // [[date,hours,cost,q1,q2,…],…]
 
-  // Filtre entre start et end (on parse la date en yyyy-MM-dd pour être cohérent)
+  // Filtre entre start et end
   const filtered = rows.filter(r => {
     const rowDate = parseDateString(r[0]);
     return rowDate >= start && rowDate <= end;
   });
 
-  // Affiche chaque date + salles jouées
   const container = document.getElementById("history-results");
   container.innerHTML = "";
   let totalH = 0, totalM = 0;
 
   filtered.forEach(row => {
-    const date       = parseDateString(row[0]); // afficher aussi la date formatée
+    const date       = parseDateString(row[0]);
     const quantities = row.slice(3);
 
-    // Crée un bloc pour cette date
+    // Création du bloc date + liste
     const block = document.createElement("div");
-    block.innerHTML = `<h4>${date}</h4>`;
-    const ul = document.createElement("ul");
+    block.classList.add("history-block");
 
-    quantities.forEach((q,i) => {
+    const dateDiv = document.createElement("div");
+    dateDiv.classList.add("history-date");
+    dateDiv.textContent = date;
+    block.appendChild(dateDiv);
+
+    const ul = document.createElement("ul");
+    ul.classList.add("history-list");
+
+    quantities.forEach((q, i) => {
       if (q > 0) {
         const li = document.createElement("li");
         li.textContent = `${rooms[i].nom} : ${q}`;
@@ -78,13 +85,11 @@ async function loadHistory() {
         totalM += q * rooms[i].duree * rooms[i].prix;
       }
     });
-    if(ul.children.length>0){
+
     block.appendChild(ul);
     container.appendChild(block);
-    }
-    });
+  });
 
-  // 3) Affiche les totaux
   document.getElementById("total-heures").textContent   = totalH.toFixed(2);
   document.getElementById("total-facture").textContent = totalM.toFixed(2);
 }
