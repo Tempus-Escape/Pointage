@@ -164,5 +164,32 @@ h3{
     padding: 0;
     list-style-position: inside;
     color: white;
-  }
+}
+
+
+/* Conteneur date + liste */
+.history-block {
+    margin-bottom: 1em;
+}
+    
+/* Date du bloc */
+.history-date {
+    font-weight: bold;
+    display: block;
+    margin: 0;
+    padding: 0.2em 0;
+}
+    
+/* Liste des salles */
+.history-list {
+    margin: 0;
+    margin-top: 0;
+    padding-left: 1.5em;
+    list-style-type: disc;
+}
+    
+/* Élément de salle */
+.history-list li {
+    margin: 0.1em 0;
+}
   
