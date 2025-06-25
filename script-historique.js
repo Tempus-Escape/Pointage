@@ -78,7 +78,7 @@ async function loadHistory() {
         li.textContent = `${rooms[i].nom} : ${q}`;
         ul.appendChild(li);
         totalH += q * rooms[i].duree;
-        totalM += q * rooms[i].duree * rooms[i].prix;
+        totalM += q * rooms[i].prix;
       }
     });
 
